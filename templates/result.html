@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Analysis Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem auto;
+            text-align: center;
+            max-width: 800px;
+        }
+        canvas {
+            margin: 20px auto;
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emotion Analysis Results</h1>
+    <canvas id="pieChart"></canvas>
+    <form action="/">
+        <button type="submit">Go Back</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    const labels = {{ labels|safe }};
+    const data = {{ data|safe }};
+
+    const ctx = document.getElementById('pieChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels.map((label, index) => `${label}: ${data[index].toFixed(1)}%`),
+            datasets: [{
+                label: 'Emotion Distribution',
+                data: data,
+                backgroundColor: ['blue', 'red', 'pink', 'green', 'purple', 'yellow'],
+            }]
+        },
+    });
+</script>
+</body>
+</html>
