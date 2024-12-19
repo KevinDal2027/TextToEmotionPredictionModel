@@ -1,7 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
 import matplotlib.pyplot as plt
-import io
-import base64
 from predictionModel import model
 from predictionModel import wordsArray
 from predictionModel import emotionArray
