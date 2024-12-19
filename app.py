@@ -1,3 +1,11 @@
+import os
+
+# Run npm install chart.js when the script starts
+os.system("npm install chart.js")
+
+print("npm install completed. Starting the app...")
+
+
 from flask import Flask, request, render_template, redirect, url_for
 import matplotlib.pyplot as plt
 from predictionModel import model
