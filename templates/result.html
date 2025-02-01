@@ -33,6 +33,10 @@
 <body>
     <h1>Emotion Analysis Results</h1>
     <canvas id="pieChart"></canvas>
+    <br>
+
+    <h1>AI Analysis Results</h1>
+    <canvas id = 'aiChart'></canvas>
     <form action="/">
         <button type="submit">Go Back</button>
     </form>
@@ -47,7 +51,21 @@
         data: {
             labels: labels.map((label, index) => `${label}: ${data[index].toFixed(1)}%`),
             datasets: [{
-                label: 'Emotion Distribution',
+                data: data,
+                backgroundColor: ['blue', 'red', 'pink', 'green', 'purple', 'yellow'],
+            }]
+        },
+    });
+
+    const labelsAI = {{ labels|safe }};
+    const dataAI = {{ data|safe }};
+
+    const ctxAI = document.getElementById('aiChart').getContext('2d');
+    new Chart(ctxAI, {
+        type: 'pie',
+        data: {
+            labelsAI: labels.map((label, index) => `${label}: ${data[index].toFixed(1)}%`),
+            datasets: [{
                 data: data,
                 backgroundColor: ['blue', 'red', 'pink', 'green', 'purple', 'yellow'],
             }]

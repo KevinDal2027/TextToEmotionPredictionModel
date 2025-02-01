@@ -1,9 +1,9 @@
 import os
-
-# Run npm install chart.js when the script starts
-os.system("npm install chart.js")
-
-print("npm install completed. Starting the app...")
+#
+# # Run npm install chart.js when the script starts
+# os.system("npm install chart.js")
+#
+# print("npm install completed. Starting the app...")
 
 
 from flask import Flask, request, render_template, redirect, url_for
@@ -17,6 +17,9 @@ import pandas as pd
 app = Flask(__name__)
 
 @app.route('/')
+def index():
+    return render_template('index.html')
+@app.route('/text', methods=['POST'])
 def home():
     return render_template('home.html')
 
@@ -31,7 +34,7 @@ def analyze():
     test = nlp(test)
 
     for word in test:
-        if word.text in list(wordsArray) and word.pos_ in ['VERB', "ADJ", "ADV", "NOUN"]:
+        if word.text in list(wordsArray) and word.pos_ in ['VERB', "ADJ", "ADV"]:
             if word.pos_ == 'ADJ':
                 testIndices.append(list(wordsArray).index(word.lemma_))
             testIndices.append(list(wordsArray).index(word.lemma_))
